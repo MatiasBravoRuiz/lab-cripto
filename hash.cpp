@@ -37,34 +37,32 @@ string hashea(string message)
     int prehash = 0;
     int middlePoint;
     int i = 0;
-    /*
-    while (i < fixedMessage.length())
+    
+    while (i < message.length())
     {
-        prehash += int(fixedMessage[i]);
+        prehash += int(message[i]);
         ++i;
     }
-    */
+    
     prehash += seed;
-    cout << "prehash: " <<prehash<<endl;
     exit;
     
     for (int i = 0; i < 25; ++i)
     {
-        middlePoint = prehash % (i + 1);
-        //cout << "middlepoint: "<<middlePoint<<endl;
-        while (middlePoint < 65)
+        middlePoint = prehash % (i + 2);
+        while(middlePoint > 122 || middlePoint < 65)
         {
-            middlePoint = middlePoint + 1;
-        }
-        //cout << "middlepoint1: "<<middlePoint<<endl;
-        while (middlePoint > 122)
+        if (middlePoint < 65)
         {
-            middlePoint = middlePoint - 1;
+            middlePoint = middlePoint + (i+2);
         }
-         //cout << "middlepoint2: "<<middlePoint<<endl;
-        //cout<< "I: "<<i<<endl;
+
+        else if (middlePoint > 122)
+        {
+            middlePoint = middlePoint - (i+2);
+        }
+        }
         hashed[i] = char(middlePoint);
-        //cout<< "Hashed[i]: "<<hashed[i]<<endl;
     }
 
     return (hashed);
