@@ -31,35 +31,40 @@ int CountUniqueCharacters(string s)
 string hashea(string message)
 {
     time_t seed = time(0);
-    string hashed;
-    string fixedMessage;
+    //string hashed[25];
+    char *hashed = new char[25];
+    //string fixedMessage;
     int prehash = 0;
     int middlePoint;
     int i = 0;
-
+    /*
     while (i < fixedMessage.length())
     {
         prehash += int(fixedMessage[i]);
         ++i;
     }
-
+    */
     prehash += seed;
-
+    cout << "prehash: " <<prehash<<endl;
+    exit;
+    
     for (int i = 0; i < 25; ++i)
     {
         middlePoint = prehash % (i + 1);
-
+        //cout << "middlepoint: "<<middlePoint<<endl;
         while (middlePoint < 65)
         {
-            middlePoint = middlePoint + i;
+            middlePoint = middlePoint + 1;
         }
-
+        //cout << "middlepoint1: "<<middlePoint<<endl;
         while (middlePoint > 122)
         {
-            middlePoint = middlePoint - i;
+            middlePoint = middlePoint - 1;
         }
-
+         //cout << "middlepoint2: "<<middlePoint<<endl;
+        //cout<< "I: "<<i<<endl;
         hashed[i] = char(middlePoint);
+        //cout<< "Hashed[i]: "<<hashed[i]<<endl;
     }
 
     return (hashed);
@@ -87,6 +92,7 @@ int main()
         entropy = message.length() * (log2(CountUniqueCharacters(message)));
 
         cout << "Entropy: " << entropy << endl;
+
         cout << "Hash: " << hashea(message) << endl;
     }
 
